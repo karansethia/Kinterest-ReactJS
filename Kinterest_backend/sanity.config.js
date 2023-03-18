@@ -8,7 +8,7 @@ export default defineConfig({
   title: 'kinterest_sanity',
 
   projectId: 'vgaojuvy',
-  dataset: 'kinterestdataset',
+  dataset: 'production',
 
   plugins: [deskTool(), visionTool()],
 
