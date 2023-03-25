@@ -17,7 +17,7 @@ const Login = () => {
           <img src={kintLogo} width='300px' alt="logo" />
         </div>
         <div className="shadow-2xl">
-          <GoogleLogin />
+          {/* <GoogleLogin /> */}
         </div>
       </div>
     </div>
