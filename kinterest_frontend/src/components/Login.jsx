@@ -17,7 +17,14 @@ const Login = () => {
           <img src={kintLogo} width='300px' alt="logo" />
         </div>
         <div className="shadow-2xl">
-          
+        <GoogleLogin
+          onSuccess={credentialResponse => {
+            console.log(credentialResponse);
+          }}
+          onError={() => {
+            console.log('Login Failed');
+          }}
+        />
         </div>
       </div>
     </div>
