@@ -4,6 +4,7 @@ import { FcGoogle } from 'react-icons/fc'
 import { GoogleLogin } from '@react-oauth/google';
 import kintLogo from '../assets/kint-logo.png'
 import backVid from '../assets/backVid.mp4'
+import jwtDecode from 'jwt-decode';
 
 const Login = () => {
   return (
@@ -20,6 +21,14 @@ const Login = () => {
         <GoogleLogin
           onSuccess={credentialResponse => {
             console.log(credentialResponse);
+            console.log(credentialResponse.credential);
+            var decoded = jwtDecode(credentialResponse.credential);
+            console.log(decoded);
+            localStorage.setItem('user',JSON.stringify(decoded))
+            let {sub, name, picture} = decoded
+            // const doc = {
+            //   _id: 
+            // }
           }}
           onError={() => {
             console.log('Login Failed');
