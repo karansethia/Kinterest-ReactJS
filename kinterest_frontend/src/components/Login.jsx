@@ -5,8 +5,30 @@ import { GoogleLogin } from '@react-oauth/google';
 import kintLogo from '../assets/kint-logo.png'
 import backVid from '../assets/backVid.mp4'
 import jwtDecode from 'jwt-decode';
+import { client } from '../client'
 
-const Login = () => {
+export default function Login() {
+
+  const navigate = useNavigate();
+  const ResponseGoogle = credentialResponse => {
+    console.log(credentialResponse);
+    console.log(credentialResponse.credential);
+    var decoded = jwtDecode(credentialResponse.credential);
+    console.log(decoded);
+    localStorage.setItem('user',JSON.stringify(decoded))
+    let {sub, name, picture} = decoded
+    const doc = {
+      _id: sub,
+      _type: 'user',
+      userName: name,
+      image: picture
+    }
+    client.createIfNotExists(doc).then(() => {
+      navigate('/',{replace:true})
+    })
+  }
+
+
   return (
     <div className='flex justify-start items-center flex-col h-screen'>
       <div className='relative w-full h-full'>
@@ -19,17 +41,7 @@ const Login = () => {
         </div>
         <div className="shadow-2xl">
         <GoogleLogin
-          onSuccess={credentialResponse => {
-            console.log(credentialResponse);
-            console.log(credentialResponse.credential);
-            var decoded = jwtDecode(credentialResponse.credential);
-            console.log(decoded);
-            localStorage.setItem('user',JSON.stringify(decoded))
-            let {sub, name, picture} = decoded
-            // const doc = {
-            //   _id: 
-            // }
-          }}
+          onSuccess={ResponseGoogle} 
           onError={() => {
             console.log('Login Failed');
           }}
@@ -39,5 +51,3 @@ const Login = () => {
     </div>
   )
 }
-
-export default Login
