@@ -11,8 +11,6 @@ export default function Login() {
 
   const navigate = useNavigate();
   const ResponseGoogle = credentialResponse => {
-    console.log(credentialResponse);
-    console.log(credentialResponse.credential);
     var decoded = jwtDecode(credentialResponse.credential);
     console.log(decoded);
     localStorage.setItem('user',JSON.stringify(decoded))
