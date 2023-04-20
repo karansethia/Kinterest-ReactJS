@@ -51,7 +51,7 @@ export const categories = [
   ];
 
 export const userQuery = userId => {
-    const query = `[_type == "user" && _id = '${userId}']`;
+    const query = `*[_type == "user" && _id == '${userId}']`;
 
     return query;
 }
